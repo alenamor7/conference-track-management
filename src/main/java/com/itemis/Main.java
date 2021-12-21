@@ -14,6 +14,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+/**
+ * Main class represents the entry point of program.
+ * Firstly we read file path from arguments args[0], read data from this file and transfer it to the collection of Talks
+ * @see com.itemis.model.Talk
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -25,6 +30,12 @@ public class Main {
         }
     }
 
+    /**
+     * This method reads data from file placed in filePath and transfers all lines into collection of Talk objects
+     * @param filePath represents the path to the file from which Talks need to be read
+     * @return the list of Talks
+     * @throws IOException
+     */
     public static List<Talk> readTalkCollectionFromFile(String filePath) throws IOException {
         Path path = Paths.get(filePath);
         List<Talk> inputTalks = new LinkedList<>();
@@ -40,6 +51,13 @@ public class Main {
         return inputTalks;
     }
 
+    /**
+     * Methods parses String to a Talk object which can be used further for ordering and sorting into Tracks
+     * @param talkLine String as it comes from the file
+     * @return Talk object
+     * @throws IncorrectTalkFormatException when talk title is empty, talk duration is more them max value
+     * or when talk cannot be parsed to either %min or lightning format
+     */
     public static Talk parseLineToTalk(String talkLine) throws IncorrectTalkFormatException {
         Pattern minutePattern = Pattern.compile("\\d+min$");
         Pattern lightningPattern = Pattern.compile("lightning$");
