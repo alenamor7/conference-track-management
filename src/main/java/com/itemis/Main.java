@@ -15,25 +15,32 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class Main {
+
     public static void main(String[] args) {
-        Path path = Paths.get(args[0]);
-        List<Talk> inputTalks = new LinkedList<>();
-
-        try (Stream<String> talkLines = Files.lines(path)) {
-            talkLines.forEach(talkLine -> {
-                try {
-                    inputTalks.add(parseLineToTalk(talkLine));
-                } catch (IncorrectTalkFormatException ex) {
-
-                }
-
-            });
-        } catch (IOException ex) {
-
+        try {
+            List<Talk> readTalks = readTalkCollectionFromFile(args[0]);
+            // TODO: continue implementing main logic
+        } catch (Exception ex) {
+            // TODO: add handling
         }
     }
 
-    private static Talk parseLineToTalk(String talkLine) throws IncorrectTalkFormatException {
+    public static List<Talk> readTalkCollectionFromFile(String filePath) throws IOException {
+        Path path = Paths.get(filePath);
+        List<Talk> inputTalks = new LinkedList<>();
+
+        Stream<String> talkLines = Files.lines(path);
+        talkLines.forEach(talkLine -> {
+            try {
+                inputTalks.add(parseLineToTalk(talkLine));
+            } catch (IncorrectTalkFormatException ex) {
+                // TODO: add handling
+            }
+        });
+        return inputTalks;
+    }
+
+    public static Talk parseLineToTalk(String talkLine) throws IncorrectTalkFormatException {
         Pattern minutePattern = Pattern.compile("\\d+min$");
         Pattern lightningPattern = Pattern.compile("lightning$");
 
@@ -50,8 +57,7 @@ public class Main {
             return new Talk(talkTitle, duration);
         } else if (lightningMatcher.find()) {
             int duration = ConferenceConstant.LIGHTNING_DURATION;
-            String talkTitle = talkLine.substring(0, lightningMatcher.start()).trim();
-            return new Talk(talkTitle, duration);
+            return new Talk(talkLine, duration);
         } else {
             throw new IncorrectTalkFormatException("Incorrect type of talk: it should contain either duration in minutes or lightning");
         }
