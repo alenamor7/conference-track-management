@@ -2,6 +2,7 @@ package com.itemis;
 
 import com.itemis.constant.ConferenceConstant;
 import com.itemis.exception.IncorrectTalkFormatException;
+import com.itemis.model.Conference;
 import com.itemis.model.Talk;
 
 import java.io.IOException;
@@ -22,37 +23,40 @@ import java.util.stream.Stream;
 public class Main {
 
     public static void main(String[] args) {
-        try {
-            List<Talk> readTalks = readTalkCollectionFromFile(args[0]);
-            // TODO: continue implementing main logic
-        } catch (Exception ex) {
-            // TODO: add handling
-        }
+        List<Talk> readTalks = readTalkCollectionFromFile(args[0]);
+        Conference conference = new Conference(readTalks);
+
     }
 
     /**
      * This method reads data from file placed in filePath and transfers all lines into collection of Talk objects
+     *
      * @param filePath represents the path to the file from which Talks need to be read
      * @return the list of Talks
      * @throws IOException
      */
-    public static List<Talk> readTalkCollectionFromFile(String filePath) throws IOException {
+    public static List<Talk> readTalkCollectionFromFile(String filePath) {
         Path path = Paths.get(filePath);
         List<Talk> inputTalks = new LinkedList<>();
 
-        Stream<String> talkLines = Files.lines(path);
-        talkLines.forEach(talkLine -> {
-            try {
-                inputTalks.add(parseLineToTalk(talkLine));
-            } catch (IncorrectTalkFormatException ex) {
-                // TODO: add handling
-            }
-        });
+        try (Stream<String> talkLines = Files.lines(path)) {
+            talkLines.forEach(talkLine -> {
+                try {
+                    inputTalks.add(parseLineToTalk(talkLine));
+                } catch (IncorrectTalkFormatException ex) {
+                    // TODO: add handling
+                }
+
+            });
+        } catch (IOException ex) {
+            // TODO: add handling
+        }
         return inputTalks;
     }
 
     /**
-     * Methods parses String to a Talk object which can be used further for ordering and sorting into Tracks
+     * This method parses String to a Talk object which can be used further for ordering and sorting into Tracks
+     *
      * @param talkLine String as it comes from the file
      * @return Talk object
      * @throws IncorrectTalkFormatException when talk title is empty, talk duration is more them max value

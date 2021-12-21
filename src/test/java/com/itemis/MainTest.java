@@ -16,12 +16,8 @@ public class MainTest {
     @Test
     public void readTalkCollectionFromFile_existedPath_pass() {
         String path = "./src/main/resources/test_data.txt";
-        try {
-            List<Talk> talks = Main.readTalkCollectionFromFile(path);
-            assertEquals(talks.size(), 19);
-        } catch (IOException ex1) {
-            fail();
-        }
+        List<Talk> talks = Main.readTalkCollectionFromFile(path);
+        assertEquals(talks.size(), 19);
     }
 
     @Test
