@@ -19,19 +19,6 @@ public class MainTest {
         try {
             List<Talk> talks = Main.readTalkCollectionFromFile(path);
             assertEquals(talks.size(), 19);
-
-        } catch (IOException ex1) {
-            fail();
-        }
-    }
-
-    @Test
-    public void readTalkCollectionFromFile_noFile_fail() {
-        String path = "./src/main/resources/test_data.txt";
-        try {
-            List<Talk> talks = Main.readTalkCollectionFromFile(path);
-            assertEquals(talks.size(), 19);
-
         } catch (IOException ex1) {
             fail();
         }
