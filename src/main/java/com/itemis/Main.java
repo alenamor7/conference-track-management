@@ -54,6 +54,9 @@ public class Main {
                 throw new IncorrectTalkFormatException("Talk cannot exceed the max duration of afternoon session");
             }
             String talkTitle = talkLine.substring(0, minuteMatcher.start()).trim();
+            if (talkTitle.length() == 0) {
+                throw new IncorrectTalkFormatException("Talk title should not be empty");
+            }
             return new Talk(talkTitle, duration);
         } else if (lightningMatcher.find()) {
             int duration = ConferenceConstant.LIGHTNING_DURATION;

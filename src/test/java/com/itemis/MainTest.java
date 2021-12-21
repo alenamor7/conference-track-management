@@ -87,4 +87,17 @@ public class MainTest {
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
+    @Test
+    public void parseLineToTalk_noTalkTitle_fail() {
+        String tooLongTalk = "    150min";
+        Exception exception = assertThrows(IncorrectTalkFormatException.class, () -> {
+            Main.parseLineToTalk(tooLongTalk);
+        });
+
+        String expectedMessage = "Talk title should not be empty";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
 }
