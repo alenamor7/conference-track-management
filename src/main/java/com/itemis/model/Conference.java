@@ -2,7 +2,7 @@ package com.itemis.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
+import java.util.StringJoiner;
 
 /**
  * Conference class represents the conference and contains the list of tracks.
@@ -46,14 +46,14 @@ public class Conference {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringJoiner stringJoiner = new StringJoiner("\n\n");
+
         int trackNumber = 1;
         for (Track track : tracks) {
-            stringBuilder.append(trackNumber + " Track\n");
-            stringBuilder.append(track.toString());
-            stringBuilder.append("\n");
+            stringJoiner.add(trackNumber + " Track" + "\n" + track.toString());
             trackNumber++;
         }
-        return stringBuilder.toString();
+
+        return stringJoiner.toString();
     }
 }

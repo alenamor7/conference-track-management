@@ -5,6 +5,7 @@ import com.itemis.constant.ConferenceConstant;
 import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * Session class represents session class which can be instantiated as morning or afternoon session.
@@ -119,10 +120,10 @@ public class Session {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringJoiner stringJoiner = new StringJoiner("\n");
         for (Talk talk : talks) {
-            stringBuilder.append("> " + talk.toString() + "\n");
+            stringJoiner.add(talk.toString());
         }
-        return stringBuilder.toString();
+        return stringJoiner.toString();
     }
 }

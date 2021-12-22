@@ -3,6 +3,7 @@ package com.itemis.model;
 import com.itemis.constant.ConferenceConstant;
 
 import java.time.LocalTime;
+import java.util.StringJoiner;
 
 /**
  * The Task class represents the POJO of a conference talk.
@@ -47,15 +48,15 @@ public class Talk {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringJoiner stringJoiner = new StringJoiner(" ");
         if (startTime != null) {
-            stringBuilder.append(startTime.format(ConferenceConstant.DATE_FORMATTER) + " ");
+            stringJoiner.add(startTime.format(ConferenceConstant.DATE_FORMATTER));
         }
-        stringBuilder.append(title);
+        stringJoiner.add(title);
         // add duration in minutes only for talks which are not lightning
         if (duration != 5) {
-            stringBuilder.append(" " + duration + "min");
+            stringJoiner.add(duration + "min");
         }
-        return stringBuilder.toString();
+        return stringJoiner.toString();
     }
 }

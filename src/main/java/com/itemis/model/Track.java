@@ -3,6 +3,7 @@ package com.itemis.model;
 import com.itemis.constant.ConferenceConstant;
 
 import java.time.LocalTime;
+import java.util.StringJoiner;
 
 /**
  * Track consists of a morning and an afternoon sessions.
@@ -61,23 +62,24 @@ public class Track {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringJoiner stringJoiner = new StringJoiner("\n");
 
         //append morning session
-        stringBuilder.append(morningSession.toString());
+        stringJoiner.add(morningSession.toString());
 
         //append lunch
-        stringBuilder.append("> " + lunchTime + " Lunch\n");
+        stringJoiner.add(lunchTime + " Lunch");
 
         //append afternoon session
         if (afternoonSession != null) {
-            stringBuilder.append(afternoonSession.toString());
+            stringJoiner.add(afternoonSession.toString());
         }
 
-        //append Networking event
+        //append Networking event right after the last Talk of afternoon session
         Talk lastAfternoonTalk = afternoonSession.getTalks().get(afternoonSession.getTalks().size() - 1);
         LocalTime networkingStartTime = lastAfternoonTalk.getStartTime().plusMinutes(lastAfternoonTalk.getDuration());
-        stringBuilder.append("> " + networkingStartTime.format(ConferenceConstant.DATE_FORMATTER) + " Networking Event\n");
-        return stringBuilder.toString();
+        stringJoiner.add(networkingStartTime.format(ConferenceConstant.DATE_FORMATTER) + " Networking Event");
+
+        return stringJoiner.toString();
     }
 }
