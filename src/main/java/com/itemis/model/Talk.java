@@ -47,8 +47,15 @@ public class Talk {
 
     @Override
     public String toString() {
-        return startTime.format(ConferenceConstant.DATE_FORMATTER) + " "
-                + title + " "
-                + duration + "min";
+        StringBuilder stringBuilder = new StringBuilder();
+        if (startTime != null) {
+            stringBuilder.append(startTime.format(ConferenceConstant.DATE_FORMATTER) + " ");
+        }
+        stringBuilder.append(title);
+        // add duration in minutes only for talks which are not lightning
+        if (duration != 5) {
+            stringBuilder.append(" " + duration + "min");
+        }
+        return stringBuilder.toString();
     }
 }
