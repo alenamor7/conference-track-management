@@ -1,13 +1,18 @@
 package com.itemis.model;
 
+import java.time.LocalTime;
+
 /**
  * The Task class represents the POJO of a conference talk.
- * The class contains 2 fields: talk's title and duration
+ * The class contains 3 fields: talk's title and duration, which are initialized within a constructor; and
+ * startTime which is set while Talks allocation and helps for Talk printing(we don't need to recalculate start time
+ * again after allocation and while printing)
  */
 public class Talk {
 
     private String title;
     private int duration;
+    private LocalTime startTime;
 
     public Talk(String title, int duration) {
         this.title = title;
@@ -28,5 +33,13 @@ public class Talk {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 }
