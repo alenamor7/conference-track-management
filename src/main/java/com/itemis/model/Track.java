@@ -1,9 +1,15 @@
 package com.itemis.model;
 
+import com.itemis.constant.ConferenceConstant;
+
+import java.time.LocalTime;
+
 /**
  * Track consists of a morning and an afternoon sessions.
  */
 public class Track {
+
+    private static final String lunchTime = LocalTime.of(12, 0).format(ConferenceConstant.DATE_FORMATTER);
 
     private Session morningSession;
     private Session afternoonSession;
@@ -44,11 +50,34 @@ public class Track {
             return true;
         } else {
             if (afternoonSession == null) {
-                if (afternoonSession.addTalk(talk)) {
-                    return true;
-                }
+                afternoonSession = Session.createAfternoonSession();
+            }
+            if (afternoonSession.addTalk(talk)) {
+                return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        //append morning session
+        stringBuilder.append(morningSession.toString());
+
+        //append lunch
+        stringBuilder.append("> " + lunchTime + " Lunch\n");
+
+        //append afternoon session
+        if (afternoonSession != null) {
+            stringBuilder.append(afternoonSession.toString());
+        }
+
+        //append Networking event
+        Talk lastAfternoonTalk = afternoonSession.getTalks().get(afternoonSession.getTalks().size() - 1);
+        LocalTime networkingStartTime = lastAfternoonTalk.getStartTime().plusMinutes(lastAfternoonTalk.getDuration());
+        stringBuilder.append("> " + networkingStartTime.format(ConferenceConstant.DATE_FORMATTER) + " Networking Event\n");
+        return stringBuilder.toString();
     }
 }

@@ -110,10 +110,19 @@ public class Session {
         if (remainingDuration - talkDuration >= 0) {
             talk.setStartTime(getLastTaskEndDate());
             talks.add(talk);
-            lastTaskEndDate.plusMinutes(talkDuration);
+            lastTaskEndDate = lastTaskEndDate.plusMinutes(talkDuration);
             remainingDuration -= talkDuration;
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Talk talk : talks) {
+            stringBuilder.append("> " + talk.toString() + "\n");
+        }
+        return stringBuilder.toString();
     }
 }

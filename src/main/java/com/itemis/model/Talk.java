@@ -1,5 +1,7 @@
 package com.itemis.model;
 
+import com.itemis.constant.ConferenceConstant;
+
 import java.time.LocalTime;
 
 /**
@@ -41,5 +43,12 @@ public class Talk {
 
     public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
+    }
+
+    @Override
+    public String toString() {
+        return startTime.format(ConferenceConstant.DATE_FORMATTER) + " "
+                + title + " "
+                + duration + "min";
     }
 }

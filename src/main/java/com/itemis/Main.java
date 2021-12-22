@@ -4,6 +4,7 @@ import com.itemis.constant.ConferenceConstant;
 import com.itemis.exception.IncorrectTalkFormatException;
 import com.itemis.model.Conference;
 import com.itemis.model.Talk;
+import com.itemis.model.Track;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,7 +26,7 @@ public class Main {
     public static void main(String[] args) {
         List<Talk> readTalks = readTalkCollectionFromFile(args[0]);
         Conference conference = new Conference(readTalks);
-
+        System.out.println(conference);
     }
 
     /**
