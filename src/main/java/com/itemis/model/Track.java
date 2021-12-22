@@ -70,15 +70,13 @@ public class Track {
         //append lunch
         stringJoiner.add(lunchTime + " Lunch");
 
-        //append afternoon session
+        //append afternoon session and Networking Event(only if afternoon session exists)
         if (afternoonSession != null) {
             stringJoiner.add(afternoonSession.toString());
+            Talk lastAfternoonTalk = afternoonSession.getTalks().get(afternoonSession.getTalks().size() - 1);
+            LocalTime networkingStartTime = lastAfternoonTalk.getStartTime().plusMinutes(lastAfternoonTalk.getDuration());
+            stringJoiner.add(networkingStartTime.format(ConferenceConstant.DATE_FORMATTER) + " Networking Event");
         }
-
-        //append Networking event right after the last Talk of afternoon session
-        Talk lastAfternoonTalk = afternoonSession.getTalks().get(afternoonSession.getTalks().size() - 1);
-        LocalTime networkingStartTime = lastAfternoonTalk.getStartTime().plusMinutes(lastAfternoonTalk.getDuration());
-        stringJoiner.add(networkingStartTime.format(ConferenceConstant.DATE_FORMATTER) + " Networking Event");
 
         return stringJoiner.toString();
     }
