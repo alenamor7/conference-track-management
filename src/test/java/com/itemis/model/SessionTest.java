@@ -53,8 +53,8 @@ public class SessionTest {
         morningSession.addTalk(firstTalk);
         morningSession.addTalk(secondTalk);
         String expectedResult = String.join("\n",
-                "> 09:00AM Ruby on Rails: Why We Should Move On 60min",
-                "> 10:00AM A World Without HackerNews lightning");
+                "09:00AM Ruby on Rails: Why We Should Move On 60min",
+                "10:00AM A World Without HackerNews lightning");
         Assertions.assertEquals(expectedResult, morningSession.toString());
     }
 
@@ -66,8 +66,8 @@ public class SessionTest {
         afternoonSession.addTalk(firstTalk);
         afternoonSession.addTalk(secondTalk);
         String expectedResult = String.join("\n",
-                "> 01:00PM Ruby on Rails: Why We Should Move On 60min",
-                "> 02:00PM A World Without HackerNews lightning");
+                "01:00PM Ruby on Rails: Why We Should Move On 60min",
+                "02:00PM A World Without HackerNews lightning");
         Assertions.assertEquals(expectedResult, afternoonSession.toString());
     }
 }
