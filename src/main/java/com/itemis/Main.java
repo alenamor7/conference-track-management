@@ -4,7 +4,8 @@ import com.itemis.constant.ConferenceConstant;
 import com.itemis.exception.IncorrectTalkFormatException;
 import com.itemis.model.Conference;
 import com.itemis.model.Talk;
-import com.itemis.model.Track;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,8 +21,11 @@ import java.util.stream.Stream;
  * Main class represents the entry point of program.
  * Firstly we read file path from arguments args[0], read data from this file and transfer it to the collection of Talks
  * @see com.itemis.model.Talk
+ * Moreover, I added logging for errors.
  */
 public class Main {
+
+    private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
         List<Talk> readTalks = readTalkCollectionFromFile(args[0]);
@@ -37,6 +41,7 @@ public class Main {
      * @throws IOException
      */
     public static List<Talk> readTalkCollectionFromFile(String filePath) {
+
         Path path = Paths.get(filePath);
         List<Talk> inputTalks = new LinkedList<>();
 
@@ -45,12 +50,12 @@ public class Main {
                 try {
                     inputTalks.add(parseLineToTalk(talkLine));
                 } catch (IncorrectTalkFormatException ex) {
-                    // TODO: add handling
+                    logger.error("Incorrect talk format: " + ex);
                 }
 
             });
         } catch (IOException ex) {
-            // TODO: add handling
+            logger.error("Caught exceptions during file reading: " + ex);
         }
         return inputTalks;
     }
