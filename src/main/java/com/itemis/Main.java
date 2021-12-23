@@ -29,7 +29,14 @@ public class Main {
 
     public static void main(String[] args) {
         List<Talk> readTalks = readTalkCollectionFromFile(args[0]);
+
+        /* I decided to leave readTalks collection as it's, because I don't think that it's a good idea to sort
+        this collection and therefore put all long-lasting Talks to the first day and leave all short-lasting Talks
+         for last days or visa-versa. */
         Conference conference = new Conference(readTalks);
+
+        /* Here's the main printing of results into console. We just call toString method for Conference,
+        which calls hierarchically toString methods for Track, Session, Talk. */
         System.out.println(conference);
     }
 

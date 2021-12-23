@@ -13,10 +13,13 @@ public class Conference {
     private List<Track> tracks = new ArrayList<>();
 
     /**
-     * Conference constructor processes talks and collect them into tracks constructed from sessions
+     * Conference constructor processes Talks and collect them into Tracks constructed from sessions.
+     * Talks are added to Tracks according to the following logic:
+     * the collection of Tracks has initially only 1 empty Track, we iterate over the collection of talks and check if
+     * the first Track has free space to get this Talk. If yes - we iterate to the next Talk. If no - we create new
+     * Track and add the Talk to this Track
      *
-     * @param unsortedTalks is a linked list of talks, which can be modified - it means, I delete Talks from it when
-     *                      I place it into a Track. Therefore, it should be better a linked list for faster deleting
+     * @param unsortedTalks is a linked list of talks
      */
     public Conference(List<Talk> unsortedTalks) {
         Track currentTrack = new Track();

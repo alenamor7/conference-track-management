@@ -36,9 +36,9 @@ public class Track {
 
     /**
      * This method adds talk to the Track
-     * Firstly I check if morning Session doesn't exist - then we create it. Then add Talk to the morning session.
-     * If Talk cannot be added to a morning Session, I try to add it to the afternoon Session in the same way:
-     * firstly create new afternoon Session if it doesn't exist and then add Talk to this session.
+     * Firstly we check if morning Session doesn't exist - then we create it. Then add Talk to the morning session.
+     * If Talk cannot be added to a morning Session, we try to add it to the afternoon Session in the same way:
+     * firstly create a new afternoon Session if it doesn't exist and then add Talk to this session.
      *
      * @param talk to be added into Track
      * @return true if talk was successfully added to either morning or afternoon session. Otherwise, returns false.

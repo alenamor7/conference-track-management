@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.StringJoiner;
 
 /**
- * Session class represents session class which can be instantiated as morning or afternoon session.
+ * Session class can be instantiated as morning or afternoon session.
  * <p>The class contains<
  *  <ul>
  *      <li>list of talks</li>
  *      <li>duration of a session because morning and afternoon sessions have different durations</li>
  *      <li>remainingDuration helps to detect if Talk can be added into Session</li>
- *      <li>lastTaskEndDate is necessary for </li>
+ *      <li>lastTaskEndDate is necessary for setting start date to a Talk when it's added to Session</li>
  *  </ul>
  * /p>
  */
@@ -27,7 +27,7 @@ public class Session {
 
 
     /**
-     * Sessions won't be created by a constructor, they're created by static method for
+     * Sessions won't be created by a constructor, they're created by static methods
      */
     public Session() {
     }

@@ -87,7 +87,7 @@ Track without morning session, this session should be instantiated and Talk shou
 They're instantiated not by constructor, but by static methods, where we set to the Session some initial fields like
 duration, remaining duration and last Talk end date, which are useful for calculations of addition possibility of Talk
 or Talk start date.
-- `Talk` in `model` represents Talk which contains duration, title fields, which are used for Talk instantiating. 
+- `Talk` in `model` package represents Talk which contains duration, title fields, which are used for Talk instantiating. 
 Talk class contains also startDate field which are set later when we add Talk to the Session and can 
 calculate the start date.
 - `Main` class contains the entry main() method which reads data from input file, path to which should be set in program
