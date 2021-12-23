@@ -70,7 +70,10 @@ Track 2:
 ---
 ### Design overview
 Application is run from Main.main() method and should get an input argument - path to the input file with Talks 
-description. Let's review implemented classes in `com.itemis` package:
+description. I split the main logic of Talk allocation into several classes like Conference, Track, Session. Probably 
+this logic could have been added as a part of Main or in separate class which would allocate Talks.
+
+Let's review implemented classes in `com.itemis` package:
 - `ConferenceConstant` in `constant` package contains some constants used in different other classes
 - `IncorrectTalkFormatException` in `exception` package was implemented to be thrown when Talk has incorrect format:
 empty task title, duration of a Talk is less than 10 minutes or more than the duration of the longest afternoon session.
