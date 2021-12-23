@@ -105,7 +105,7 @@ transmitted into Conference object.
 ``` 
 mvn clean package
 ```
-Maven will run all tests, report about results of testing and package jar file which we run in next step.
+Maven will run all tests, report about results of testing and package jar file which we run in next step.  
 3) Run in command line:
 ``` 
 java -jar ./target/conference.jar ./src/main/resources/test_data.txt
