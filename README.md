@@ -67,3 +67,47 @@ Track 2:
 - 03:00PM Ruby on Rails Legacy App Maintenance 60min 
 - 04:00PM Rails for Python Developers lightning 
 - 05:00PM Networking Event
+---
+### Design overview
+Application is run from Main.main() method and should get an input argument - path to the input file with Talks 
+description. Let's review implemented classes in `com.itemis` package:
+- `ConferenceConstant` in `constant` package contains some constants used in different other classes
+- `IncorrectTalkFormatException` in `exception` package was implemented to be thrown when Talk has incorrect format:
+empty task title, duration of a Talk is less than 10 minutes or more than the duration of the longest afternoon session.
+- `Conference` in `model` package represents a Conference which is instantiated based on the list of Talk and
+allocate them into Tracks based on the following logic: initially we create the first empty Track, iterate over Talks 
+list and add them to the Track. If Talk cannot be added to Track, we create the new Track and this Talk to it. 
+While iterating over Talks we also iterate over Tracks because even though current Talk cannot be added to this Track,
+next Talk could be possibly added further because of smaller duration.
+- `Track` in `model` package represents Track class which consist of 2 sessions: morning and afternoon. Both sessions 
+are not created right while Track object creation, they're created while Talk addition - when we want to add Talk to 
+Track without morning session, this session should be instantiated and Talk should be added. When we cannot add Talk to
+- morning Session, we create an afternoon Session and add Talk to it. 
+- `Session` in `model`package represents Session class which can be instantiated as a morning or afternoon Session.
+They're instantiated not by constructor, but by static methods, where we set to the Session some initial fields like
+duration, remaining duration and last Talk end date, which are useful for calculations of addition possibility of Talk
+or Talk start date.
+- `Talk` in `model` represents Talk which contains duration, title fields, which are used for Talk instantiating. 
+Talk class contains also startDate field which are set later when we add Talk to the Session and can 
+calculate the start date.
+- `Main` class contains the entry main() method which reads data from input file, path to which should be set in program
+arguments. Data is read line by line, which are converted into Talk objects, stored in a collection and then are 
+transmitted into Conference object.  
+
+
+---
+### How to run application 
+1) Clone git repository to your local directory 
+2) Run command line in this local directory and run maven:
+``` 
+mvn clean package
+```
+Maven will run all tests, report about results of testing and package jar file which we run in next step.
+3) Run in command line:
+``` 
+java -jar ./target/conference.jar ./src/main/resources/test_data.txt
+```
+where ./src/main/resources/test_data.txt is a relative path to the input file.
+
+P.S. Of course if you want you can run Intellij IDEA or other IDE, configure path to input file in program arguments 
+and run Main.main().
