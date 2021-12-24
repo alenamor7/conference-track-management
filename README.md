@@ -114,3 +114,5 @@ where ./src/main/resources/test_data.txt is a relative path to the input file.
 
 P.S. Of course if you want you can run Intellij IDEA or other IDE, configure path to input file in program arguments 
 and run Main.main().
+P.P.S. I committed one commit after I sent a repository, because I didn't check jar running after LogManager addition. 
+It failed, therefore I committed fix for pom.xml file.
