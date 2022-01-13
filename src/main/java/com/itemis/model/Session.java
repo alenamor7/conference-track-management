@@ -29,7 +29,7 @@ public class Session {
     /**
      * Sessions won't be created by a constructor, they're created by static methods
      */
-    public Session() {
+    private Session() {
     }
 
     public List<Talk> getTalks() {
@@ -116,6 +116,28 @@ public class Session {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Session session = (Session) o;
+
+        if (duration != session.duration) return false;
+        if (remainingDuration != session.remainingDuration) return false;
+        if (talks != null ? !talks.equals(session.talks) : session.talks != null) return false;
+        return lastTaskEndDate != null ? lastTaskEndDate.equals(session.lastTaskEndDate) : session.lastTaskEndDate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = talks != null ? talks.hashCode() : 0;
+        result = 31 * result + duration;
+        result = 31 * result + remainingDuration;
+        result = 31 * result + (lastTaskEndDate != null ? lastTaskEndDate.hashCode() : 0);
+        return result;
     }
 
     @Override
